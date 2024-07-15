@@ -25,8 +25,8 @@ The microservice uses a plugin architecture, making it agnostic of the cloud pro
 
 1. **Clone the Repository**:
     ```sh
-    git clone https://github.com/marangiv/cloud-provisioning-service.git
-    cd cloud-provisioning-service
+    git clone https://github.com/marangiv/CloudProvisioningService.git
+    cd CloudProvisioningService
     ```
 
 2. **Restore Dependencies**:
