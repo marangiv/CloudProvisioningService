@@ -27,7 +27,7 @@ namespace CloudProvisioningService.Controllers
     /// </summary>
     /// <param name="instance_id">The identifier for the instance to be provisioned. This parameter is part of the URL path.</param>
     /// <param name="request">The details of the virtual machine to be provisioned, received in the request body.</param>
-    /// <returns>An IActionResult that contains the ID of the newly provisioned instance if successful; othe
+    /// <returns>An IActionResult that contains the ID of the newly provisioned instance if successful;</returns>
     [HttpPut("{instance_id}")]
     public async Task<IActionResult> ProvisionInstance(string instance_id, [FromBody] VirtualMachineRequest request)
     {
@@ -40,7 +40,7 @@ namespace CloudProvisioningService.Controllers
     /// </summary>
     /// <param name="instance_id">The identifier for the instance to be deprovisioned. This parameter is part of the URL path.</param>
     /// <param name="request">The details of the virtual machine to be deprovisioned, received in the request body.</param>
-    /// <returns>An IActionResult indicating the result of the deprovision operation. Returns OK if successful; otherwi
+    /// <returns>An IActionResult indicating the result of the deprovision operation. Returns OK if successful;</returns>
     [HttpDelete("{instance_id}")]
     public async Task<IActionResult> DeprovisionInstance(string instance_id, [FromBody] VirtualMachineRequest request)
     {

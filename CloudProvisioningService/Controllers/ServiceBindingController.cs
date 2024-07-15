@@ -29,7 +29,7 @@ namespace CloudProvisioningService.Controllers
     /// <param name="binding_id">The ID of the service binding.</param>
     /// <param name="region_id">The region ID where the service is to be bound.</param>
     /// <param name="request">The binding request containing necessary information for the binding operation.</param>
-    /// <returns>An IActionResult indicating the result of the binding operation. Returns 
+    /// <returns>An IActionResult indicating the result of the binding operation.</returns> 
     [HttpPut("{binding_id}")]
     public async Task<IActionResult> BindService(string instance_id, string binding_id, string region_id, [FromBody] BindingRequest request)
     {
