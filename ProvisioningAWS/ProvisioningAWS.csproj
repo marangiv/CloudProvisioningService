@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Services\AWSCredentialService.cs" />
+	  <Compile Remove="Services\LambdaService.cs" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AWSCommon\AWSCommon.csproj" />
+		<ProjectReference Include="..\ProvisioningFramework\ProvisioningFramework.csproj" />
+		<PackageReference Include="AWSSDK.EC2" Version="3.7.334.1" />
+		<PackageReference Include="AWSSDK.Lambda" Version="3.7.305.50" />
+		<PackageReference Include="AWSSDK.SecurityToken" Version="3.7.300.119" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+	</ItemGroup>
+	<PropertyGroup>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<OutDir>$(OutputPath)</OutDir>
+	</PropertyGroup>
+	<Target Name="CopyPlugins" AfterTargets="Build,Publish">
+		<ItemGroup>
+			<AllFiles Include="$(OutputPath)\**\*.dll" />
+		</ItemGroup>
+		<Copy SourceFiles="@(AllFiles)" DestinationFolder="$(SolutionDir)\CloudProvisioningService\bin\$(Configuration)\$(TargetFramework)\plugins" SkipUnchangedFiles="true" />
+	</Target>
+</Project>

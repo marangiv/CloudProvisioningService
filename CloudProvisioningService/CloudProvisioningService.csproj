@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<_ContentIncludedByDefault Remove="appsettings.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AWSCommon\AWSCommon.csproj" />
+		<ProjectReference Include="..\ProvisioningFramework\ProvisioningFramework.csproj" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.6.2" />
+	</ItemGroup>
+	<Target Name="EnsurePluginFolderExists" BeforeTargets="Build;Publish">
+		<MakeDir Directories="$(OutputPath)\plugins" />
+	</Target>
+	<Target Name="CopyPluginsToOutput" AfterTargets="Build;Publish">
+		<ItemGroup>
+			<PluginFiles Include="..\ProvisioningFramework\bin\$(Configuration)\$(TargetFramework)\**\*.*" />
+			<PluginFiles Include="..\ProvisioningAWS\bin\$(Configuration)\$(TargetFramework)\**\*.*" />
+		</ItemGroup>
+		<Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(OutputPath)\plugins" SkipUnchangedFiles="true" />
+	</Target>
+	<Target Name="CopyPluginsToPublish" AfterTargets="Publish">
+		<ItemGroup>
+			<PluginFiles Include="$(OutputPath)\plugins\*.dll" />
+		</ItemGroup>
+		<Copy SourceFiles="@(PluginFiles)" DestinationFolder="$(PublishDir)\plugins" SkipUnchangedFiles="true" />
+	</Target>
+</Project>
